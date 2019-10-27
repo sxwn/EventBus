@@ -16,12 +16,16 @@ public class SecondActivity extends Activity {
     }
 
     public void sendMessage(View view) {
+//        FuctionManager.getInstance().invokeFuction("noparamnoresult");
+        Nebean nebean = FuctionManager.getInstance().invokeFuction("noparamhasresult", Nebean.class);
+//        Nebean nebean = FuctionManager.getInstance().invokeFuction("hasparamhasresult", Nebean.class,new Nebean("111111111111","222222222222222"));
+        Log.e("weip","SecondActivity"+nebean.toString());
         new Thread(
                 new Runnable() {
                     @Override
                     public void run() {
                         Log.e("weip","SecondActivity threadname:"+Thread.currentThread().getName());
-                        EventBus.getDefault().post(new User("智囊三"));
+//                        EventBus.getDefault().post(new User("智囊三"));
                     }
                 }
         ).start();
