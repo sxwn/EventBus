@@ -1,11 +1,10 @@
 package com.xiaowei.eventbus;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-
-import com.xiaowei.eventbuss.EventBus;
 
 public class SecondActivity extends Activity {
 
@@ -13,7 +12,22 @@ public class SecondActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two);
+        EventBus.getDefault().register(this);
+        Intent intent = new Intent();
+        intent.setClass(this,ThreeActivity.class);
+        startActivity(intent);
     }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void add(Nebean nebean){
+        Log.e("weip","add"+nebean.toString());
+    }
+
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void tt(Nebean nebean){
+        Log.e("weip","tt"+nebean.toString());
+    }
+
+
 
     public void sendMessage(View view) {
 //        FuctionManager.getInstance().invokeFuction("noparamnoresult");
